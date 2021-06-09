@@ -1,0 +1,49 @@
+<div class="pages-top">
+  <div class="avatar-wrap">
+    <div class="">
+      <!-- <img src="../../../../assets/images/oawa.PNG" width="150px" alt="avatar" style="border-radius: 50px;"> -->
+      <span style="color: white; font-size: xx-large;">OAWA LMS</span>
+    </div>
+    
+  </div>
+
+  <div class="collapse-menu" (click)="_sidebarToggle()">
+    <!-- <i class="fa fa-navicon fa-fw" [ngClass]="{'toggle-on':sidebarToggle,'toggle-off':!sidebarToggle}"></i> -->
+    <i class="fa fa-dedent fa-fw" *ngIf="sidebarToggle"></i>
+    <i class="fa fa-indent fa-fw" *ngIf="!sidebarToggle"></i>
+  </div>
+  
+
+
+  <div class="search-group">
+    <input type="text" class="search-input" placeholder="Search project · · ·">
+    <button class="search-btn">
+      <i class="fa fa-search fa-fw"></i>
+    </button>
+  </div>
+  <br>
+  <div class="dropdown" style="padding-left: 900px;">
+     
+    <img src="../../../../assets/icons/help.jpg" width="60" style="border-radius: 100px;" class="dropbtn">
+    <div class="dropdown-content" style="left:10;">
+      <a href="#">User Manual</a>
+      <a href="#">Oawa Policies</a>
+      <a href="#">Technology Requirements</a>
+      <a href="#">Contact Us</a>
+    </div>
+  </div>
+  <div class="msg-tips-wrap">
+    
+    
+    
+    <div class="msg-entrance ring">
+      <span class="fa fa-bell fa-fw"></span>
+      <span class="badge" *ngIf="tip.ring"></span>
+    </div>
+    <div class="msg-entrance email">
+      <span class="fa fa-envelope fa-fw"></span>
+      <span class="badge" *ngIf="tip.email"></span>
+    </div>
+  </div>
+  
+</div>
