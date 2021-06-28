@@ -148,6 +148,8 @@ namespace OAWA.API
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<INewsletterRepository, NewsletterRepository>();
+            services.AddScoped<IAssignmentRepository, AssignmentRepository>();
+            services.AddScoped<INuggetRepository, NuggetRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

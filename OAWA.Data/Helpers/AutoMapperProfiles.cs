@@ -30,7 +30,33 @@ namespace OAWA.Data.Helpers
             })
             .ForMember(dest => dest.FileName, opt => 
             {
-                opt.MapFrom(src => UrlHelper.baseUrl+"newsletters/"+ src.FileName);
+                opt.MapFrom(src => UrlHelper.baseUrl+"files/"+ src.FileName);
+            });
+            CreateMap<Assignment, AssignmentDto>()
+            .ForMember(dest => dest.AttachmentFile, opt => 
+            {
+                opt.MapFrom(src => UrlHelper.baseUrl+"files/"+ src.AttachmentFile);
+            });
+            CreateMap<Nugget, NuggetDto>()
+            .ForMember(dest => dest.LessonId, opt => 
+            {
+                opt.MapFrom(src => src.LessonId);
+            })
+            .ForMember(dest => dest.Lesson, opt => 
+            {
+                opt.MapFrom(src => src.Lesson.Name);
+            })
+            .ForMember(dest => dest.NuggetId, opt => 
+            {
+                opt.MapFrom(src => src.Id);
+            })
+            .ForMember(dest => dest.Nugget, opt => 
+            {
+                opt.MapFrom(src => src.Name);
+            })
+            .ForMember(dest => dest.ClassDate, opt => 
+            {
+                opt.MapFrom(src => src.ClassDate.ToString("dd/MM/yyyy"));
             });
         }
 

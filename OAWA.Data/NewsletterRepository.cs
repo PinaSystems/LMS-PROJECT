@@ -38,13 +38,13 @@ namespace OAWA.Data
             var res= await _context.SaveChangesAsync()>0?true:false;
             if(res)
             {
-                await EmailManager.SendEmailAsync("sajeesh.chatl@yahoo.com","","","");
-                EmailManager.SendMessage(new Batches()
-                {
-                    Text="Newsletter has received. Please check!",
-                    Number="9074328103"
-                });
-                return true;
+                // await EmailManager.SendEmailAsync("sajeesh.chatl@yahoo.com","","","");
+                // EmailManager.SendMessage(new Batches()
+                // {
+                //     Text="Newsletter has received. Please check!",
+                //     Number="9074328103"
+                // });
+                // return true;
             }
             return false;
 

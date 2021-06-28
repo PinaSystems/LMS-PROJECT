@@ -120,7 +120,7 @@ namespace OAWA.Data.Helpers
                 //                                               //for the file due to security reasons.
                     fileName=Guid.NewGuid().ToString()+"-"+ DateTime.Now.Ticks + extension;
                     string path = "", subPath="";
-                    subPath = fileType == FileType.image? "files": "newsletters";
+                    subPath = "files";
                     // path = Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles",subPath, fileName);
                     path = Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles",subPath, fileName);
 

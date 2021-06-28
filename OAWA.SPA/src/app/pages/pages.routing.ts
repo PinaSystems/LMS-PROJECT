@@ -1,11 +1,21 @@
 import { Routes, RouterModule } from '@angular/router';
 import { PagesComponent } from './pages.component';
 import { LoginComponent } from './login/login.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 export const childRoutes: Routes = [
     {
         path: 'login',
         component: LoginComponent,
+    },
+    {
+        path: 'password/forgot',
+        component: ForgotPasswordComponent,
+    },
+    {
+        path: 'password/reset',
+        component: ResetPasswordComponent,
     },
     {
         path: 'pages',
@@ -26,6 +36,7 @@ export const childRoutes: Routes = [
             { path: 'content', loadChildren: './content/content.module#ContentModule' },
             { path: 'chat', loadChildren: './chat/chat.module#ChatModule' },
             { path: 'contactus', loadChildren: './contactus/contactus.module#ContactusModule' },
+            { path: 'assignment', loadChildren: './assessment/assessment.module#AssessmentModule' },
         ]
     }
 ];

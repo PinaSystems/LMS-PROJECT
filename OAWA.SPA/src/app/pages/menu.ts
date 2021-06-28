@@ -18,7 +18,7 @@ export let MENU_ITEM = [
                 title: 'Edit Content'
             },
             {
-                path: 'notification',
+                path: 'view',
                 title: 'View Content'
             },
             {
@@ -55,21 +55,21 @@ export let MENU_ITEM = [
         ]
     },
     {
-        path: 'profile',
-        title: 'Assessment',
+        path: 'assignment',
+        title: 'Assignment',
         icon: 'user',
         children: [
             {
-                path: 'grid',
-                title: 'Question Bank upload'
+                path: 'upload',
+                title: 'Upload Assignment'
             },
             {
-                path: 'buttons',
-                title: 'View Question Bank'
+                path: 'view',
+                title: 'View Assignment'
             },
             {
-                path: 'buttons',
-                title: 'Submit assessment'
+                path: 'scoring/:id',
+                title: 'Scoring assessment'
             }
         ]
     },

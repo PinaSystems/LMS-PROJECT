@@ -9,6 +9,16 @@ const appRoutes: Routes = [
   },
   {
     path: '',
+    redirectTo: 'password/forgot',
+    pathMatch: 'full'
+  },
+  {
+    path: '',
+    redirectTo: 'password/reset',
+    pathMatch: 'full'
+  },
+  {
+    path: '',
     redirectTo: 'pages/index',
     pathMatch: 'full'
   },

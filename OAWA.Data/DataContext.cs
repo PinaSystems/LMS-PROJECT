@@ -22,6 +22,14 @@ namespace OAWA.Data
         public DbSet<LoginHistory> LoginHistories { get; set; }
         public DbSet<WebsiteVisitor> WebsiteVisitors { get; set; }
         public DbSet<NewsLetter> NewsLetters { get; set; }
+        public DbSet<Assignment> Assignments { get; set; }
+        public DbSet<AssignmentSubmission> AssignmentSubmissions { get; set; }
+        public DbSet<Lesson> Lessons { get; set; }
+        public DbSet<Nugget> Nuggets { get; set; }
+        public DbSet<NuggetUsage> NuggetUsages { get; set; }
+        public DbSet<NuggetLikeDislike> NuggetLikeDislikes { get; set; }
+        public DbSet<NuggetComments> NuggetComments { get; set; }
+        public DbSet<NuggetBookmark> NuggetBookmarks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

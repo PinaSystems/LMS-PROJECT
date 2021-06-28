@@ -85,6 +85,62 @@ namespace OAWA.API.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("OAWA.Data.Models.Assignment", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AttachmentFile");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<DateTime>("DeadLine");
+
+                    b.Property<string>("Description");
+
+                    b.Property<long>("LessonId");
+
+                    b.Property<int>("MaxScore");
+
+                    b.Property<string>("Name");
+
+                    b.Property<long>("NuggetId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Assignments");
+                });
+
+            modelBuilder.Entity("OAWA.Data.Models.AssignmentSubmission", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("AssignmentId");
+
+                    b.Property<string>("Comments");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("File");
+
+                    b.Property<int>("Score");
+
+                    b.Property<long>("StudentId");
+
+                    b.Property<int>("SubmissionStatus");
+
+                    b.Property<string>("TrainerRemarks");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AssignmentId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("AssignmentSubmissions");
+                });
+
             modelBuilder.Entity("OAWA.Data.Models.Content", b =>
                 {
                     b.Property<long>("Id")
@@ -143,6 +199,22 @@ namespace OAWA.API.Migrations
                     b.ToTable("LearnerChoices");
                 });
 
+            modelBuilder.Entity("OAWA.Data.Models.Lesson", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Lessons");
+                });
+
             modelBuilder.Entity("OAWA.Data.Models.LoginHistory", b =>
                 {
                     b.Property<long>("Id")
@@ -181,6 +253,118 @@ namespace OAWA.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("NewsLetters");
+                });
+
+            modelBuilder.Entity("OAWA.Data.Models.Nugget", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("BatchId");
+
+                    b.Property<DateTime>("ClassDate");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("Description");
+
+                    b.Property<long>("LessonId");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("NuggetStatus");
+
+                    b.Property<int>("SequenceNo");
+
+                    b.Property<DateTime>("UpdatedDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LessonId");
+
+                    b.ToTable("Nuggets");
+                });
+
+            modelBuilder.Entity("OAWA.Data.Models.NuggetBookmark", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreateddDate");
+
+                    b.Property<long>("NuggetId");
+
+                    b.Property<long>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NuggetId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("NuggetBookmarks");
+                });
+
+            modelBuilder.Entity("OAWA.Data.Models.NuggetComments", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreateddDate");
+
+                    b.Property<long>("NuggetId");
+
+                    b.Property<long>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NuggetId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("NuggetComments");
+                });
+
+            modelBuilder.Entity("OAWA.Data.Models.NuggetLikeDislike", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("LikeDislikeType");
+
+                    b.Property<long>("NuggetId");
+
+                    b.Property<long>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NuggetId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("NuggetLikeDislikes");
+                });
+
+            modelBuilder.Entity("OAWA.Data.Models.NuggetUsage", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ElapsedTime");
+
+                    b.Property<long>("NuggetId");
+
+                    b.Property<int>("SlideNumber");
+
+                    b.Property<DateTime>("StartTime");
+
+                    b.Property<DateTime>("StopTime");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NuggetId");
+
+                    b.ToTable("NuggetUsages");
                 });
 
             modelBuilder.Entity("OAWA.Data.Models.Permission", b =>
@@ -407,6 +591,19 @@ namespace OAWA.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("OAWA.Data.Models.AssignmentSubmission", b =>
+                {
+                    b.HasOne("OAWA.Data.Models.Assignment", "Assignment")
+                        .WithMany()
+                        .HasForeignKey("AssignmentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("OAWA.Data.Models.User", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("OAWA.Data.Models.Content", b =>
                 {
                     b.HasOne("OAWA.Data.Models.Content", "Dependency")
@@ -434,6 +631,61 @@ namespace OAWA.API.Migrations
                     b.HasOne("OAWA.Data.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("OAWA.Data.Models.Nugget", b =>
+                {
+                    b.HasOne("OAWA.Data.Models.Lesson", "Lesson")
+                        .WithMany()
+                        .HasForeignKey("LessonId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("OAWA.Data.Models.NuggetBookmark", b =>
+                {
+                    b.HasOne("OAWA.Data.Models.Nugget", "Nugget")
+                        .WithMany()
+                        .HasForeignKey("NuggetId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("OAWA.Data.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("OAWA.Data.Models.NuggetComments", b =>
+                {
+                    b.HasOne("OAWA.Data.Models.Nugget", "Nugget")
+                        .WithMany()
+                        .HasForeignKey("NuggetId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("OAWA.Data.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("OAWA.Data.Models.NuggetLikeDislike", b =>
+                {
+                    b.HasOne("OAWA.Data.Models.Nugget", "Nugget")
+                        .WithMany()
+                        .HasForeignKey("NuggetId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("OAWA.Data.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("OAWA.Data.Models.NuggetUsage", b =>
+                {
+                    b.HasOne("OAWA.Data.Models.Nugget", "Nugget")
+                        .WithMany()
+                        .HasForeignKey("NuggetId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
