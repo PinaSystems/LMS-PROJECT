@@ -78,15 +78,15 @@ namespace OAWA.API.Controllers
             var result = await _signInManager.CheckPasswordSignInAsync(user, userForLoginDto.Password, false);
             if (result.Succeeded)
             {
-                var appUser = await _userManager.Users.Include(p => p.UserRoles).ThenInclude(p => p.Role)
+                var appUser = await _userManager.Users.Include(p => p.Role)
                 .FirstOrDefaultAsync(u => u.NormalizedEmail == userForLoginDto.Email.ToUpper());
-                var roles= new List<RoleDto>();
-                appUser.UserRoles.ToList().ForEach(item => 
-                {
-                    roles.Add(new RoleDto (){ Id= item.Role.Id, Name = item.Role.NormalizedName });
-                });
+                // var roles= new List<RoleDto>();
+                // appUser.UserRoles.ToList().ForEach(item => 
+                // {
+                //     roles.Add(new RoleDto (){ Id= item.Role.Id, Name = item.Role.NormalizedName });
+                // });
                 var userToReturn = _mapper.Map<UserForListDto>(appUser);
-                userToReturn.Roles= roles;
+                // userToReturn.Roles= roles;
                 var newRefreshToken = GenerateRefreshToken();
                 await _userRepository.SaveRefreshToken(appUser.Id, newRefreshToken);
                 return Ok(new

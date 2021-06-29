@@ -31,5 +31,6 @@ namespace OAWA.Data.Dtos
             Created = DateTime.Now;
             LastActive = DateTime.Now;
         }
+        public long RoleId { get; set; }
     }
 }

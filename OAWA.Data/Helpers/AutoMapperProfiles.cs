@@ -14,6 +14,14 @@ namespace OAWA.Data.Helpers
             .ForMember(dest => dest.Name, opt => 
             {
                 opt.MapFrom(src => src.Name+ (string.IsNullOrEmpty(src.LastName)?"":" "+src.LastName));
+            })
+            .ForMember(dest => dest.RoleId, opt => 
+            {
+                opt.MapFrom(src => src.RoleId);
+            })
+            .ForMember(dest => dest.Role, opt => 
+            {
+                opt.MapFrom(src => src.Role.Name);
             });
             CreateMap<User, UserForDetailDto>();            
             CreateMap<UserForUpdateDto, User>().ForAllMembers(action => action.Condition((src, dest, srcMember) => srcMember!=null));

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using OAWA.Data.Enums;
+using OAWA.Data.Models;
 
 namespace OAWA.Data.Dtos
 {
@@ -19,6 +20,8 @@ namespace OAWA.Data.Dtos
         public string PhotoUrl { get; set; }
         public ICollection<RoleDto> Roles { get; set; }
         public bool IsEmailConfirmed { get; set; }
+        public long RoleId { get; set; }
+        public string Role { get; set; }
 
     }
 }

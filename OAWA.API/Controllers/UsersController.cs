@@ -100,6 +100,40 @@ namespace OAWA.API.Controllers
             }
         }
 
-        
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<ActionResult> CreateUserAsync(UserForRegisterDto userForRegisterDto)
+        {
+            if(string.IsNullOrEmpty( userForRegisterDto.Email.Trim())) return BadRequest("Email required");
+            if(string.IsNullOrEmpty( userForRegisterDto.Password) || string.IsNullOrEmpty( userForRegisterDto.Password.Trim())) return BadRequest("Password required");
+            userForRegisterDto.Username= userForRegisterDto.Email;
+            var userToCreate = _mapper.Map<User>(userForRegisterDto);
+            userToCreate.Created= DateTime.UtcNow;
+            var result= await _repo.GetUserIdByEmail(userForRegisterDto.Email);
+            if(result!=0){
+                        
+                        return BadRequest("User already exists");
+            }
+            var res = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
+            if(!res.Succeeded)  return BadRequest($"Error in creating user {userForRegisterDto.Email}");
+            // var roles= await _repo.GetRoles();
+            // var rolesToAdd = roles.Where(item => item.Name.Equals("EndUser")).ToList();
+            // rolesToAdd.ForEach(item => 
+            // {
+            //     userRoles.Add(new UserRole (){ UserId= userToCreate.Id, RoleId= item.Id });
+            // });
+            // await _context.UserRoles.AddRangeAsync(userRoles);
+            var obj= await _context.SaveChangesAsync()>0?true:false;
+            return Ok(obj);
+            //Send OTP to email
+            // await SendOtpForVerificationAsync(userForRegisterDto.Email, userForRegisterDto.FirstName+" "+userForRegisterDto.LastName);
+            // return Ok(new ResponseModelHelper{
+            //             StatusCode=(int)StatusCodesEnum.Ok,
+            //             Status=1,
+            //             Message=$"6-digit verification code is sent to {userForRegisterDto.Email}!",
+            //             Data= JsonConvert.SerializeObject(await _repo.GetUser(userToCreate.Id)),
+            //             Total_Records=1
+            //         });
+        } 
     }
 }
