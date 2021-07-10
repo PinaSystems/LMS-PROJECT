@@ -23,10 +23,20 @@ namespace OAWA.Data.Models
         public LoginStatusType LoginStatus { get; set; }
         public UserStatusType UserStatus { get; set; }
         public PaymentStatusType PaymentStatus { get; set; }
+        public PaymentStatusType EntranceTestPaymentStatus { get; set; }
         public float EntranceTestScore { get; set; }
         public EntranceTestType EntranceTestStatus { get; set; }
         public UserCategoryType UserCategory { get; set; }
         public long RoleId { get; set; }
         public Role Role { get; set; }
+        public DateTime LastLoginDate { get; set; }
+        public int Age { get; set; }
+        public EducationType EducationType { get; set; }
+        public string Address { get; set; }
+        public string State { get; set; }
+        public string PinCode { get; set; }
+        public string AlternateNumber { get; set; }
+        public int Batch { get; set; }
+
     }
 }
