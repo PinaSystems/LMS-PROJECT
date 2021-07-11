@@ -78,7 +78,8 @@ namespace OAWA.API.Controllers
             var result = await _signInManager.CheckPasswordSignInAsync(user, userForLoginDto.Password, false);
             if (result.Succeeded)
             {
-                var appUser = await _userManager.Users.Include(p => p.Role)
+                var appUser = await _userManager.Users
+                .Include(p => p.Role)
                 .FirstOrDefaultAsync(u => u.NormalizedEmail == userForLoginDto.Email.ToUpper());
                 // var roles= new List<RoleDto>();
                 // appUser.UserRoles.ToList().ForEach(item => 

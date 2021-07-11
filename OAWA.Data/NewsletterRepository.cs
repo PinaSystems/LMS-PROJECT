@@ -44,7 +44,7 @@ namespace OAWA.Data
                 //     Text="Newsletter has received. Please check!",
                 //     Number="9074328103"
                 // });
-                // return true;
+                return true;
             }
             return false;
 
