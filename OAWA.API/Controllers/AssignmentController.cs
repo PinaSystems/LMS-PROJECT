@@ -18,6 +18,16 @@ namespace OAWA.API.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAssignmentsAll([FromQuery] AssignmentParams assignmentParams)
+        {
+            var assignments= await _assignmentRepo.GetAssessmentsAll(assignmentParams);
+            if(assignments!=null)
+                return Ok(assignments);
+            return BadRequest();
+        }
+
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAssignments([FromQuery] AssignmentParams assignmentParams)
         {
@@ -31,6 +41,8 @@ namespace OAWA.API.Controllers
         [HttpGet("students")]
         public async Task<IActionResult> GetStudentAssignments([FromQuery] AssignmentParams assignmentParams)
         {
+            var userId= int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            assignmentParams.UserId= userId;
             var assignments= await _assignmentRepo.GetStudentAssignments(assignmentParams);
             if(assignments!=null)
                 return Ok(assignments);

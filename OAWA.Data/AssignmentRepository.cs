@@ -22,6 +22,15 @@ namespace OAWA.Data
             _mapper= mapper;
         }
 
+        public async Task<PagedList<AssignmentDto>> GetAssessmentsAll(AssignmentParams assignmentParams)
+        {
+            var assignments= await _context.Assignments
+                                            .ToListAsync();
+            var assignmentForViewDto= new List<AssignmentDto>();
+            _mapper.Map(assignments,assignmentForViewDto);
+            return await PagedList<AssignmentDto>.CreateAsyncWithDtos(assignmentForViewDto.AsQueryable(), assignmentParams.Page, assignmentParams.Per_Page);
+        }
+
         public async Task<PagedList<AssignmentDto>> GetAssessments(AssignmentParams assignmentParams)
         {
             var assignments= await _context.AssignmentSubmissions
@@ -50,7 +59,8 @@ namespace OAWA.Data
         {
             var assignments= await _context.AssignmentSubmissions
                                             .Include(item => item.Assignment)
-                                            .Where(p => p.SubmissionStatus== Enums.SubmissionStatusType.Pending)
+                                            .Where(p => p.SubmissionStatus== Enums.SubmissionStatusType.Pending
+                                            && p.StudentId==assignmentParams.UserId)
                                             .Select(p => p.Assignment)
                                             .ToListAsync();
             var assignmentForViewDto= new List<AssignmentDto>();

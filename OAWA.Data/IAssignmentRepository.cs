@@ -7,6 +7,7 @@ namespace OAWA.Data
 {
     public interface IAssignmentRepository
     {
+        Task<PagedList<AssignmentDto>> GetAssessmentsAll(AssignmentParams assignmentParams);
         Task<PagedList<AssignmentDto>> GetAssessments(AssignmentParams assignmentParams);
         Task<PagedList<AssignmentDto>> GetStudentAssignments(AssignmentParams assignmentParams);
         Task<bool> UploadAssignment(IFormFile file, string assignmentJson);
